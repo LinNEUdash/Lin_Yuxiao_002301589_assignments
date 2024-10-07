@@ -12,20 +12,20 @@ public class Account {
     
     private String firstName;
     private String lastName;
-    private int socialSecurityNumber;
-    private int age;
+    private String socialSecurityNumber;
+    private String age;
     private String streetAddressHome;
     private String unitNumberHome;
     private String cityHome;
     private String stateHome;
-    private int zipcodeHome;
-    private long phoneNumberHome;
+    private String zipcodeHome;
+    private String phoneNumberHome;
     private String streetAddressWork;
     private String unitNumberWork;
     private String cityWork;
     private String stateWork;
-    private int zipcodeWork;
-    private long phoneNumberWork;
+    private String zipcodeWork;
+    private String phoneNumberWork;
 
     public String getFirstName() {
         return firstName;
@@ -43,19 +43,19 @@ public class Account {
         this.lastName = lastName;
     }
 
-    public int getSocialSecurityNumber() {
+    public String getSocialSecurityNumber() {
         return socialSecurityNumber;
     }
 
-    public void setSocialSecurityNumber(int socialSecurityNumber) {
+    public void setSocialSecurityNumber(String socialSecurityNumber) {
         this.socialSecurityNumber = socialSecurityNumber;
     }
 
-    public int getAge() {
+    public String getAge() {
         return age;
     }
 
-    public void setAge(int age) {
+    public void setAge(String age) {
         this.age = age;
     }
 
@@ -91,19 +91,19 @@ public class Account {
         this.stateHome = stateHome;
     }
 
-    public int getZipcodeHome() {
+    public String getZipcodeHome() {
         return zipcodeHome;
     }
 
-    public void setZipcodeHome(int zipcodeHome) {
+    public void setZipcodeHome(String zipcodeHome) {
         this.zipcodeHome = zipcodeHome;
     }
 
-    public long getPhoneNumberHome() {
+    public String getPhoneNumberHome() {
         return phoneNumberHome;
     }
 
-    public void setPhoneNumberHome(long phoneNumberHome) {
+    public void setPhoneNumberHome(String phoneNumberHome) {
         this.phoneNumberHome = phoneNumberHome;
     }
 
@@ -139,20 +139,24 @@ public class Account {
         this.stateWork = stateWork;
     }
 
-    public int getZipcodeWork() {
+    public String getZipcodeWork() {
         return zipcodeWork;
     }
 
-    public void setZipcodeWork(int zipcodeWork) {
+    public void setZipcodeWork(String zipcodeWork) {
         this.zipcodeWork = zipcodeWork;
     }
 
-    public long getPhoneNumberWork() {
+    public String getPhoneNumberWork() {
         return phoneNumberWork;
     }
 
-    public void setPhoneNumberWork(long phoneNumberWork) {
+    public void setPhoneNumberWork(String phoneNumberWork) {
         this.phoneNumberWork = phoneNumberWork;
     }
+    
+    
+
+    
    
 }

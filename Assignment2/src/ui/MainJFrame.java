@@ -4,6 +4,12 @@
  */
 package ui;
 
+import java.awt.CardLayout;
+import javax.swing.JPanel;
+import model.AccountDirectory;
+import ui.AccountManager.CreateAccountJPanel;
+import ui.AccountManager.ManageAccountsJPanel;
+
 /**
  *
  * @author linyuxiao
@@ -13,9 +19,20 @@ public class MainJFrame extends javax.swing.JFrame {
     /**
      * Creates new form MainJFrame
      */
+    
+    private AccountDirectory accountDirectory;
+    
     public MainJFrame() {
         initComponents();
+        
+        this.accountDirectory = new AccountDirectory();
+        
+        
+
     }
+    
+   
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -33,7 +50,7 @@ public class MainJFrame extends javax.swing.JFrame {
         btnListPerson = new javax.swing.JButton();
         txtType = new javax.swing.JTextField();
         btnSearch = new javax.swing.JButton();
-        userProcessorContainer = new javax.swing.JPanel();
+        userProcessContainer = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -44,6 +61,11 @@ public class MainJFrame extends javax.swing.JFrame {
         lblTitle.setText("Person Profile");
 
         btnAddPerson.setText("Add Person");
+        btnAddPerson.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddPersonActionPerformed(evt);
+            }
+        });
 
         btnListPerson.setText("List Person");
         btnListPerson.addActionListener(new java.awt.event.ActionListener() {
@@ -97,18 +119,8 @@ public class MainJFrame extends javax.swing.JFrame {
 
         splitPane.setLeftComponent(leftJPanel);
 
-        javax.swing.GroupLayout userProcessorContainerLayout = new javax.swing.GroupLayout(userProcessorContainer);
-        userProcessorContainer.setLayout(userProcessorContainerLayout);
-        userProcessorContainerLayout.setHorizontalGroup(
-            userProcessorContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 433, Short.MAX_VALUE)
-        );
-        userProcessorContainerLayout.setVerticalGroup(
-            userProcessorContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 427, Short.MAX_VALUE)
-        );
-
-        splitPane.setRightComponent(userProcessorContainer);
+        userProcessContainer.setLayout(new java.awt.CardLayout());
+        splitPane.setRightComponent(userProcessContainer);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -128,11 +140,27 @@ public class MainJFrame extends javax.swing.JFrame {
 
     private void btnListPersonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListPersonActionPerformed
         // TODO add your handling code here:
+        
+        
+        ManageAccountsJPanel managePanel = new ManageAccountsJPanel(userProcessContainer, accountDirectory);
+        userProcessContainer.add("ManageAccountsJPanel", managePanel);
+        
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
     }//GEN-LAST:event_btnListPersonActionPerformed
 
     private void txtTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTypeActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtTypeActionPerformed
+
+    private void btnAddPersonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddPersonActionPerformed
+          
+        CreateAccountJPanel createPanel = new CreateAccountJPanel(userProcessContainer, accountDirectory);
+        userProcessContainer.add("CreateAccountJPanel", createPanel);
+        
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
+    }//GEN-LAST:event_btnAddPersonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -177,6 +205,8 @@ public class MainJFrame extends javax.swing.JFrame {
     private javax.swing.JPanel leftJPanel;
     private javax.swing.JSplitPane splitPane;
     private javax.swing.JTextField txtType;
-    private javax.swing.JPanel userProcessorContainer;
+    private javax.swing.JPanel userProcessContainer;
     // End of variables declaration//GEN-END:variables
+
+
 }

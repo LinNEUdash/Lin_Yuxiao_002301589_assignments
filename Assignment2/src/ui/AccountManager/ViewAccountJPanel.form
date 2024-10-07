@@ -25,15 +25,15 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="lblFirstName" linkSize="1" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="txtFirstName" linkSize="1" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="lblLastName" linkSize="1" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtLastName" linkSize="1" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblLastName" linkSize="1" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtLastName" linkSize="1" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
@@ -52,8 +52,8 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="HomeJPanel" min="-2" max="-2" attributes="0"/>
-                  <Component id="lblHomeAddress" min="-2" max="-2" attributes="0"/>
+                  <Component id="HomeJPanel" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblHomeAddress" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
@@ -62,9 +62,12 @@
               </Group>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
-          <Group type="102" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="32767" attributes="0"/>
-              <Component id="btnCreate" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="btnUpdate" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnSave" alignment="0" min="-2" max="-2" attributes="0"/>
+              </Group>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
@@ -94,7 +97,7 @@
                   <Component id="txtAge" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="txtSSN" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
                       <Component id="lblHomeAddress" min="-2" max="-2" attributes="0"/>
@@ -108,13 +111,25 @@
                   </Group>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="btnCreate" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
+              <Component id="btnSave" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="btnUpdate" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
+    <Component class="javax.swing.JTextField" name="txtAge">
+    </Component>
+    <Component class="javax.swing.JButton" name="btnUpdate">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Update"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnUpdateActionPerformed"/>
+      </Events>
+    </Component>
     <Component class="javax.swing.JLabel" name="lblCreate">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -124,42 +139,13 @@
           <Font name="Helvetica Neue" size="18" style="0"/>
         </Property>
         <Property name="horizontalAlignment" type="int" value="0"/>
-        <Property name="text" type="java.lang.String" value="Create Account"/>
+        <Property name="text" type="java.lang.String" value="View Account"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lblFirstName">
       <Properties>
         <Property name="text" type="java.lang.String" value="First Name"/>
       </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="lblLastName">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Last Name"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="txtFirstName">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtFirstNameActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JTextField" name="txtLastName">
-    </Component>
-    <Component class="javax.swing.JLabel" name="lblSSN">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Social Security Number"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="txtSSN">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtSSNActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JLabel" name="lblAge">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Age"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="txtAge">
     </Component>
     <Container class="javax.swing.JPanel" name="HomeJPanel">
       <Properties>
@@ -179,23 +165,23 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="lblStreetAdressHome" linkSize="2" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="txtStreetAddressHome" linkSize="2" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="lblCityHome" linkSize="2" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="txtCityHome" linkSize="2" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="lblZipCodeHome" linkSize="2" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="txtZipCodeHome" linkSize="2" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblStreetAdressHome" linkSize="4" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtStreetAddressHome" linkSize="4" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblCityHome" linkSize="4" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtCityHome" linkSize="4" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblZipCodeHome" linkSize="4" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtZipCodeHome" linkSize="4" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="79" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="lblUnitNumberHome" linkSize="2" min="-2" max="-2" attributes="0"/>
-                      <Component id="txtUnitNumberHome" linkSize="2" min="-2" max="-2" attributes="0"/>
-                      <Component id="lblStateHome" linkSize="2" min="-2" max="-2" attributes="0"/>
-                      <Component id="txtStateHome" linkSize="2" min="-2" max="-2" attributes="0"/>
-                      <Component id="lblPhoneNumberHome" linkSize="2" min="-2" max="-2" attributes="0"/>
-                      <Component id="txtPhoneNumberHome" linkSize="2" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblUnitNumberHome" linkSize="4" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtUnitNumberHome" linkSize="4" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblStateHome" linkSize="4" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtStateHome" linkSize="4" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblPhoneNumberHome" linkSize="4" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtPhoneNumberHome" linkSize="4" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="17" max="32767" attributes="0"/>
+                  <EmptySpace pref="18" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -285,6 +271,11 @@
         </Component>
       </SubComponents>
     </Container>
+    <Component class="javax.swing.JLabel" name="lblLastName">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Last Name"/>
+      </Properties>
+    </Component>
     <Component class="javax.swing.JLabel" name="lblHomeAddress">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -292,6 +283,13 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Home Address"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtFirstName">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtFirstNameActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtLastName">
     </Component>
     <Container class="javax.swing.JPanel" name="WorkJPanel">
       <Properties>
@@ -417,6 +415,16 @@
         </Component>
       </SubComponents>
     </Container>
+    <Component class="javax.swing.JLabel" name="lblSSN">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Social Security Number"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtSSN">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtSSNActionPerformed"/>
+      </Events>
+    </Component>
     <Component class="javax.swing.JLabel" name="lblWorkAddress">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -425,12 +433,17 @@
         <Property name="text" type="java.lang.String" value="Work Address"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="btnCreate">
+    <Component class="javax.swing.JLabel" name="lblAge">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Create"/>
+        <Property name="text" type="java.lang.String" value="Age"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnSave">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Save"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCreateActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSaveActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

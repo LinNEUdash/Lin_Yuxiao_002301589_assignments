@@ -13,20 +13,22 @@ import model.AccountDirectory;
  *
  * @author linyuxiao
  */
-public class CreateAccountJPanel extends javax.swing.JPanel {
+public class ViewAccountJPanel extends javax.swing.JPanel {
 
     /**
-     * Creates new form CreateAccountJPanel
+     * Creates new form ViewAccountJPanel
      */
+    private JPanel userProcessContainer;
+    private AccountDirectory accountDirectory;
+    private Account account;
     
-    JPanel userProcessContainer;
-    AccountDirectory accountDirectory;
-    
-    public CreateAccountJPanel(JPanel container, AccountDirectory directory) {
+    public ViewAccountJPanel(JPanel userProcessContainer, AccountDirectory directory, Account account) {
         initComponents();
+        this.userProcessContainer = userProcessContainer;
+        this.account = account;
         
-        this.userProcessContainer = container;
-        this.accountDirectory = directory;
+        refreshTextFields();
+        setViewMode();
     }
 
     /**
@@ -38,15 +40,10 @@ public class CreateAccountJPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        txtAge = new javax.swing.JTextField();
+        btnUpdate = new javax.swing.JButton();
         lblCreate = new javax.swing.JLabel();
         lblFirstName = new javax.swing.JLabel();
-        lblLastName = new javax.swing.JLabel();
-        txtFirstName = new javax.swing.JTextField();
-        txtLastName = new javax.swing.JTextField();
-        lblSSN = new javax.swing.JLabel();
-        txtSSN = new javax.swing.JTextField();
-        lblAge = new javax.swing.JLabel();
-        txtAge = new javax.swing.JTextField();
         HomeJPanel = new javax.swing.JPanel();
         lblStreetAdressHome = new javax.swing.JLabel();
         lblUnitNumberHome = new javax.swing.JLabel();
@@ -60,7 +57,10 @@ public class CreateAccountJPanel extends javax.swing.JPanel {
         lblPhoneNumberHome = new javax.swing.JLabel();
         txtZipCodeHome = new javax.swing.JTextField();
         txtPhoneNumberHome = new javax.swing.JTextField();
+        lblLastName = new javax.swing.JLabel();
         lblHomeAddress = new javax.swing.JLabel();
+        txtFirstName = new javax.swing.JTextField();
+        txtLastName = new javax.swing.JTextField();
         WorkJPanel = new javax.swing.JPanel();
         lblStreetAddressWork = new javax.swing.JLabel();
         lblUnitNumberWork = new javax.swing.JLabel();
@@ -74,35 +74,27 @@ public class CreateAccountJPanel extends javax.swing.JPanel {
         lblPhoneNumberWork = new javax.swing.JLabel();
         txtZipCodeWork = new javax.swing.JTextField();
         txtPhoneNumberWork = new javax.swing.JTextField();
+        lblSSN = new javax.swing.JLabel();
+        txtSSN = new javax.swing.JTextField();
         lblWorkAddress = new javax.swing.JLabel();
-        btnCreate = new javax.swing.JButton();
+        lblAge = new javax.swing.JLabel();
+        btnSave = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(153, 255, 153));
+
+        btnUpdate.setText("Update");
+        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateActionPerformed(evt);
+            }
+        });
 
         lblCreate.setBackground(new java.awt.Color(255, 255, 255));
         lblCreate.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         lblCreate.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblCreate.setText("Create Account");
+        lblCreate.setText("View Account");
 
         lblFirstName.setText("First Name");
-
-        lblLastName.setText("Last Name");
-
-        txtFirstName.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtFirstNameActionPerformed(evt);
-            }
-        });
-
-        lblSSN.setText("Social Security Number");
-
-        txtSSN.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtSSNActionPerformed(evt);
-            }
-        });
-
-        lblAge.setText("Age");
 
         HomeJPanel.setBackground(new java.awt.Color(0, 255, 204));
         HomeJPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -146,7 +138,7 @@ public class CreateAccountJPanel extends javax.swing.JPanel {
                     .addComponent(txtStateHome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblPhoneNumberHome)
                     .addComponent(txtPhoneNumberHome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         HomeJPanelLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {lblCityHome, lblPhoneNumberHome, lblStateHome, lblStreetAdressHome, lblUnitNumberHome, lblZipCodeHome, txtCityHome, txtPhoneNumberHome, txtStateHome, txtStreetAddressHome, txtUnitNumberHome, txtZipCodeHome});
@@ -181,8 +173,16 @@ public class CreateAccountJPanel extends javax.swing.JPanel {
                 .addContainerGap(17, Short.MAX_VALUE))
         );
 
+        lblLastName.setText("Last Name");
+
         lblHomeAddress.setFont(new java.awt.Font("Didot", 2, 14)); // NOI18N
         lblHomeAddress.setText("Home Address");
+
+        txtFirstName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtFirstNameActionPerformed(evt);
+            }
+        });
 
         WorkJPanel.setBackground(new java.awt.Color(0, 255, 204));
         WorkJPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -261,13 +261,23 @@ public class CreateAccountJPanel extends javax.swing.JPanel {
                 .addContainerGap(17, Short.MAX_VALUE))
         );
 
+        lblSSN.setText("Social Security Number");
+
+        txtSSN.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtSSNActionPerformed(evt);
+            }
+        });
+
         lblWorkAddress.setFont(new java.awt.Font("Didot", 2, 14)); // NOI18N
         lblWorkAddress.setText("Work Address");
 
-        btnCreate.setText("Create");
-        btnCreate.addActionListener(new java.awt.event.ActionListener() {
+        lblAge.setText("Age");
+
+        btnSave.setText("Save");
+        btnSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCreateActionPerformed(evt);
+                btnSaveActionPerformed(evt);
             }
         });
 
@@ -308,7 +318,9 @@ public class CreateAccountJPanel extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnCreate)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnUpdate)
+                    .addComponent(btnSave))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -335,7 +347,7 @@ public class CreateAccountJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtAge, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtSSN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(25, 25, 25)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(lblHomeAddress)
@@ -346,28 +358,30 @@ public class CreateAccountJPanel extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(WorkJPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
-                .addComponent(btnCreate)
-                .addGap(41, 41, 41))
+                .addComponent(btnSave)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnUpdate)
+                .addGap(12, 12, 12))
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void txtFirstNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFirstNameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtFirstNameActionPerformed
-
-    private void txtSSNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSSNActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtSSNActionPerformed
 
     private void txtStateHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtStateHomeActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtStateHomeActionPerformed
 
+    private void txtFirstNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFirstNameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtFirstNameActionPerformed
+
     private void txtStateWorkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtStateWorkActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtStateWorkActionPerformed
 
-    private void btnCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateActionPerformed
+    private void txtSSNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSSNActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtSSNActionPerformed
+
+    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         // TODO add your handling code here:
         String firstName = txtFirstName.getText();
         String lastName = txtLastName.getText();
@@ -393,51 +407,39 @@ public class CreateAccountJPanel extends javax.swing.JPanel {
             return;
         }
         
+        account.setFirstName(firstName);
+        account.setLastName(lastName);
+        account.setSocialSecurityNumber(SSN);
+        account.setAge(age);
+        account.setStreetAddressHome(streetAddressHome);
+        account.setUnitNumberHome(unitNumberHome);
+        account.setCityHome(cityHome);
+        account.setStateHome(stateHome);
+        account.setZipcodeHome(zipCodeHome);
+        account.setPhoneNumberHome(phoneNumberHome);
+        account.setStreetAddressWork(streetAddressWork);
+        account.setUnitNumberWork(unitNumberWork);
+        account.setCityWork(cityWork);
+        account.setStateWork(stateWork);
+        account.setZipcodeWork(zipCodeWork);
+        account.setPhoneNumberWork(phoneNumberWork);
         
-        Account a = accountDirectory.addAccount();
+        JOptionPane.showMessageDialog(null, "Account successfully updated.", "Warning", JOptionPane.WARNING_MESSAGE);
         
-        a.setFirstName(firstName);
-        a.setLastName(lastName);
-        a.setSocialSecurityNumber(SSN);
-        a.setAge(age);
-        a.setStreetAddressHome(streetAddressHome);
-        a.setUnitNumberHome(unitNumberHome);
-        a.setCityHome(cityHome);
-        a.setStateHome(stateHome);
-        a.setZipcodeHome(zipCodeHome);
-        a.setPhoneNumberHome(phoneNumberHome);
-        a.setStreetAddressWork(streetAddressWork);
-        a.setUnitNumberWork(unitNumberWork);
-        a.setCityWork(cityWork);
-        a.setStateWork(stateWork);
-        a.setZipcodeWork(zipCodeWork);
-        a.setPhoneNumberWork(phoneNumberWork);
-        
-        JOptionPane.showMessageDialog(this, "Account successfully created", "Information", JOptionPane.INFORMATION_MESSAGE);
-        
-        txtFirstName.setText("");
-        txtLastName.setText("");
-        txtSSN.setText("");
-        txtAge.setText("");
-        txtStreetAddressHome.setText("");
-        txtUnitNumberHome.setText("");
-        txtCityHome.setText("");
-        txtStateHome.setText("");
-        txtZipCodeHome.setText("");
-        txtPhoneNumberHome.setText("");
-        txtStreetAddressWork.setText("");
-        txtUnitNumberWork.setText("");
-        txtCityWork.setText("");
-        txtStateWork.setText("");
-        txtZipCodeWork.setText("");
-        txtPhoneNumberWork.setText("");
-    }//GEN-LAST:event_btnCreateActionPerformed
+        setViewMode();
+    }//GEN-LAST:event_btnSaveActionPerformed
+
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+        // TODO add your handling code here:
+        setEditMode();
+    }//GEN-LAST:event_btnUpdateActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel HomeJPanel;
     private javax.swing.JPanel WorkJPanel;
-    private javax.swing.JButton btnCreate;
+    private javax.swing.JButton btnSave;
+    private javax.swing.JButton btnUpdate;
     private javax.swing.JLabel lblAge;
     private javax.swing.JLabel lblCityHome;
     private javax.swing.JLabel lblCityWork;
@@ -474,4 +476,70 @@ public class CreateAccountJPanel extends javax.swing.JPanel {
     private javax.swing.JTextField txtZipCodeHome;
     private javax.swing.JTextField txtZipCodeWork;
     // End of variables declaration//GEN-END:variables
+    
+    private void refreshTextFields() {
+        txtFirstName.setText(account.getFirstName());
+        txtLastName.setText(account.getLastName());
+        txtSSN.setText(account.getSocialSecurityNumber());
+        txtAge.setText(account.getAge());
+        txtStreetAddressHome.setText(account.getStreetAddressHome());
+        txtUnitNumberHome.setText(account.getUnitNumberHome());
+        txtCityHome.setText(account.getCityHome());
+        txtStateHome.setText(account.getStateHome());
+        txtZipCodeHome.setText(account.getZipcodeHome());
+        txtPhoneNumberHome.setText(account.getPhoneNumberHome());
+        txtStreetAddressWork.setText(account.getStreetAddressWork());
+        txtUnitNumberWork.setText(account.getUnitNumberWork());
+        txtCityWork.setText(account.getCityWork());
+        txtStateWork.setText(account.getStateWork());
+        txtZipCodeWork.setText(account.getZipcodeWork());
+        txtPhoneNumberWork.setText(account.getPhoneNumberWork());
+    }
+    
+    private void setViewMode() {
+        
+        txtFirstName.setEnabled(false);
+        txtLastName.setEnabled(false);
+        txtSSN.setEnabled(false);
+        txtAge.setEnabled(false);
+        txtStreetAddressHome.setEnabled(false);
+        txtUnitNumberHome.setEnabled(false);
+        txtCityHome.setEnabled(false);
+        txtStateHome.setEnabled(false);
+        txtZipCodeHome.setEnabled(false);
+        txtPhoneNumberHome.setEnabled(false);
+        txtStreetAddressWork.setEnabled(false);
+        txtUnitNumberWork.setEnabled(false);
+        txtCityWork.setEnabled(false);
+        txtStateWork.setEnabled(false);
+        txtZipCodeWork.setEnabled(false);
+        txtPhoneNumberWork.setEnabled(false);
+        
+        btnSave.setEnabled(false);
+        btnUpdate.setEnabled(true);
+                
+    }
+    
+    private void setEditMode() {
+        
+        txtFirstName.setEnabled(true);
+        txtLastName.setEnabled(true);
+        txtSSN.setEnabled(true);
+        txtAge.setEnabled(true);
+        txtStreetAddressHome.setEnabled(true);
+        txtUnitNumberHome.setEnabled(true);
+        txtCityHome.setEnabled(true);
+        txtStateHome.setEnabled(true);
+        txtZipCodeHome.setEnabled(true);
+        txtPhoneNumberHome.setEnabled(true);
+        txtStreetAddressWork.setEnabled(true);
+        txtUnitNumberWork.setEnabled(true);
+        txtCityWork.setEditable(true);
+        txtStateWork.setEnabled(true);
+        txtZipCodeWork.setEnabled(true);
+        txtPhoneNumberWork.setEnabled(true);
+        
+        btnSave.setEnabled(true);
+        btnUpdate.setEnabled(false);
+    }
 }
