@@ -8,6 +8,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import model.Account;
 import model.AccountDirectory;
+import model.Address;
 
 /**
  *
@@ -371,8 +372,7 @@ public class CreateAccountJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         String firstName = txtFirstName.getText();
         String lastName = txtLastName.getText();
-        String SSN = txtSSN.getText();
-        String age = txtAge.getText();
+        
         String streetAddressHome = txtStreetAddressHome.getText();
         String unitNumberHome = txtUnitNumberHome.getText();
         String cityHome = txtCityHome.getText();
@@ -386,10 +386,24 @@ public class CreateAccountJPanel extends javax.swing.JPanel {
         String zipCodeWork = txtZipCodeWork.getText();
         String phoneNumberWork = txtPhoneNumberWork.getText();
         
-        if (firstName.isBlank() || lastName.isBlank() || SSN.isBlank() || age.isBlank() || streetAddressHome.isBlank() || unitNumberHome.isBlank() || cityHome.isBlank() || stateHome.isBlank() || zipCodeHome.isBlank() || phoneNumberHome.isBlank() || streetAddressWork.isBlank() || unitNumberWork.isBlank() || cityWork.isBlank() || stateWork.isBlank() || zipCodeWork.isBlank() || phoneNumberWork.isBlank())
+        if (firstName.isBlank() || lastName.isBlank() || streetAddressHome.isBlank() || unitNumberHome.isBlank() || cityHome.isBlank() || stateHome.isBlank() || zipCodeHome.isBlank() || phoneNumberHome.isBlank() || streetAddressWork.isBlank() || unitNumberWork.isBlank() || cityWork.isBlank() || stateWork.isBlank() || zipCodeWork.isBlank() || phoneNumberWork.isBlank())
         {
             JOptionPane.showMessageDialog(this, "All fields are mandatory.", "Error", JOptionPane.ERROR_MESSAGE);
             //pause until the user closes the dialog.
+            return;
+        }
+        
+        try {
+            int age = Integer.parseInt(txtAge.getText()); 
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, "Please enter valid numeric values for age.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        try {
+            long SSN = Long.parseLong(txtSSN.getText());  
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, "Please enter valid numeric values for SSN.", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
         
@@ -398,20 +412,26 @@ public class CreateAccountJPanel extends javax.swing.JPanel {
         
         a.setFirstName(firstName);
         a.setLastName(lastName);
+        int age = Integer.parseInt(txtAge.getText());
+        long SSN = Long.parseLong(txtSSN.getText());
         a.setSocialSecurityNumber(SSN);
         a.setAge(age);
-        a.setStreetAddressHome(streetAddressHome);
-        a.setUnitNumberHome(unitNumberHome);
-        a.setCityHome(cityHome);
-        a.setStateHome(stateHome);
-        a.setZipcodeHome(zipCodeHome);
-        a.setPhoneNumberHome(phoneNumberHome);
-        a.setStreetAddressWork(streetAddressWork);
-        a.setUnitNumberWork(unitNumberWork);
-        a.setCityWork(cityWork);
-        a.setStateWork(stateWork);
-        a.setZipcodeWork(zipCodeWork);
-        a.setPhoneNumberWork(phoneNumberWork);
+        
+        Address homeAddress = a.getHomeAddress();
+        homeAddress.setStreetAddress(streetAddressHome);
+        homeAddress.setUnitNumber(unitNumberHome);
+        homeAddress.setCity(cityHome);
+        homeAddress.setState(stateHome);
+        homeAddress.setZipcode(zipCodeHome);
+        homeAddress.setPhoneNumber(phoneNumberHome);
+
+        Address workAddress = a.getWorkAddress();
+        workAddress.setStreetAddress(streetAddressWork);
+        workAddress.setUnitNumber(unitNumberWork);
+        workAddress.setCity(cityWork);
+        workAddress.setState(stateWork);
+        workAddress.setZipcode(zipCodeWork);
+        workAddress.setPhoneNumber(phoneNumberWork);
         
         JOptionPane.showMessageDialog(this, "Account successfully created", "Information", JOptionPane.INFORMATION_MESSAGE);
         

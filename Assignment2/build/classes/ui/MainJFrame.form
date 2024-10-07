@@ -60,7 +60,7 @@
                       <EmptySpace pref="43" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="103" alignment="0" groupAlignment="2" attributes="0">
-                              <Component id="txtType" linkSize="1" alignment="2" min="-2" max="-2" attributes="0"/>
+                              <Component id="txtSearchBox" linkSize="1" alignment="2" min="-2" max="-2" attributes="0"/>
                               <Component id="btnListPerson" linkSize="1" alignment="2" min="-2" max="-2" attributes="0"/>
                               <Component id="btnAddPerson" linkSize="1" alignment="2" min="-2" pref="118" max="-2" attributes="0"/>
                           </Group>
@@ -80,7 +80,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="btnListPerson" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
-                      <Component id="txtType" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtSearchBox" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="btnSearch" min="-2" max="-2" attributes="0"/>
                       <EmptySpace pref="180" max="32767" attributes="0"/>
@@ -114,18 +114,22 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnListPersonActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JTextField" name="txtType">
+            <Component class="javax.swing.JTextField" name="txtSearchBox">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Type name or street address"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtTypeActionPerformed"/>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="txtSearchBoxMouseClicked"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtSearchBoxActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JButton" name="btnSearch">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Search for Person"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSearchActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>

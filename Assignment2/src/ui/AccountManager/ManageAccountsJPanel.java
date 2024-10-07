@@ -56,15 +56,23 @@ public class ManageAccountsJPanel extends javax.swing.JPanel {
 
         tblAccounts.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "First Name", "Last Name", "Social Security Number", "Age"
+                "", "First Name", "Last Name", "City (Home)", "Zip Code (Home)", "City (Work)", "Zip Code (Work)"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(tblAccounts);
 
         btnViewDetails.setText("View Details");
@@ -85,27 +93,34 @@ public class ManageAccountsJPanel extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lblCreate, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 667, Short.MAX_VALUE)
+            .addComponent(lblCreate, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 744, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnDelete)
-                    .addComponent(btnViewDetails)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 585, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnDelete)
+                            .addComponent(btnViewDetails))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1))
+                .addContainerGap())
         );
+
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnDelete, btnViewDetails});
+
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(14, 14, 14)
                 .addComponent(lblCreate)
-                .addGap(31, 31, 31)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(32, 32, 32)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnViewDetails)
                 .addGap(18, 18, 18)
                 .addComponent(btnDelete)
-                .addContainerGap(36, Short.MAX_VALUE))
+                .addContainerGap(85, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -117,6 +132,7 @@ public class ManageAccountsJPanel extends javax.swing.JPanel {
         if (selectedRow >= 0) {
 
             Account selectedAccount = (Account) tblAccounts.getValueAt(selectedRow, 0);
+            
 
             ViewAccountJPanel panel = new ViewAccountJPanel(userProcessContainer, accountDirectory, selectedAccount);
             userProcessContainer.add("ViewAccountJPanel", panel);
@@ -154,21 +170,31 @@ public class ManageAccountsJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel lblCreate;
     private javax.swing.JTable tblAccounts;
     // End of variables declaration//GEN-END:variables
+    
     public void populateTable() {
         DefaultTableModel model =(DefaultTableModel) tblAccounts.getModel();
         model.setRowCount((0));
         
         for (Account a : accountDirectory.getAccounts()) {
             
-            Object[] row = new Object[5];
+            Object[] row = new Object[7];
             row[0] = a;
             row[1] = a.getFirstName();
             row[2] = a.getLastName();
-            row[3] = a.getSocialSecurityNumber();
-            row[4] = a.getAge();
+            row[3] = a.getHomeAddress().getCity();
+            row[4] = a.getHomeAddress().getZipcode();
+            row[5] = a.getWorkAddress().getCity();
+            row[6] = a.getWorkAddress().getZipcode();
             
             model.addRow(row);
         }
+        
+        tblAccounts.getColumnModel().getColumn(0).setMinWidth(0);
+        tblAccounts.getColumnModel().getColumn(0).setMaxWidth(0);
+        tblAccounts.getColumnModel().getColumn(0).setWidth(0);
+        tblAccounts.getColumnModel().getColumn(0).setPreferredWidth(0);
     }
 
 }
+
+

@@ -36,7 +36,14 @@ public class AccountDirectory {
         accounts.remove(account);
     }
     
-    
+    public Account searchAccount(String accountNumber) {
+        for (Account a : accounts) {
+            if (a.getFirstName().contains(accountNumber) || a.getLastName().contains(accountNumber) || a.getHomeAddress().getStreetAddress().contains(accountNumber) || a.getWorkAddress().getStreetAddress().contains(accountNumber)){
+                return a;
+            }
+        }
+        return null;
+    }
     
     
 }

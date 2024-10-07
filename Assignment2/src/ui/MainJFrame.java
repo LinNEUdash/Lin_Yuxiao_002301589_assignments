@@ -5,10 +5,13 @@
 package ui;
 
 import java.awt.CardLayout;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import model.Account;
 import model.AccountDirectory;
 import ui.AccountManager.CreateAccountJPanel;
 import ui.AccountManager.ManageAccountsJPanel;
+import ui.AccountManager.ViewAccountJPanel;
 
 /**
  *
@@ -27,7 +30,7 @@ public class MainJFrame extends javax.swing.JFrame {
         
         this.accountDirectory = new AccountDirectory();
         
-        
+        generateDemoData();
 
     }
     
@@ -48,7 +51,7 @@ public class MainJFrame extends javax.swing.JFrame {
         lblTitle = new javax.swing.JLabel();
         btnAddPerson = new javax.swing.JButton();
         btnListPerson = new javax.swing.JButton();
-        txtType = new javax.swing.JTextField();
+        txtSearchBox = new javax.swing.JTextField();
         btnSearch = new javax.swing.JButton();
         userProcessContainer = new javax.swing.JPanel();
 
@@ -74,14 +77,24 @@ public class MainJFrame extends javax.swing.JFrame {
             }
         });
 
-        txtType.setText("Type name or street address");
-        txtType.addActionListener(new java.awt.event.ActionListener() {
+        txtSearchBox.setText("Type name or street address");
+        txtSearchBox.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtSearchBoxMouseClicked(evt);
+            }
+        });
+        txtSearchBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtTypeActionPerformed(evt);
+                txtSearchBoxActionPerformed(evt);
             }
         });
 
         btnSearch.setText("Search for Person");
+        btnSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearchActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout leftJPanelLayout = new javax.swing.GroupLayout(leftJPanel);
         leftJPanel.setLayout(leftJPanelLayout);
@@ -92,14 +105,14 @@ public class MainJFrame extends javax.swing.JFrame {
                 .addContainerGap(43, Short.MAX_VALUE)
                 .addGroup(leftJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(leftJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                        .addComponent(txtType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtSearchBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(btnListPerson)
                         .addComponent(btnAddPerson, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(btnSearch))
                 .addContainerGap(43, Short.MAX_VALUE))
         );
 
-        leftJPanelLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnAddPerson, btnListPerson, btnSearch, txtType});
+        leftJPanelLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnAddPerson, btnListPerson, btnSearch, txtSearchBox});
 
         leftJPanelLayout.setVerticalGroup(
             leftJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -111,7 +124,7 @@ public class MainJFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnListPerson)
                 .addGap(40, 40, 40)
-                .addComponent(txtType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtSearchBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnSearch)
                 .addContainerGap(180, Short.MAX_VALUE))
@@ -149,9 +162,9 @@ public class MainJFrame extends javax.swing.JFrame {
         layout.next(userProcessContainer);
     }//GEN-LAST:event_btnListPersonActionPerformed
 
-    private void txtTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTypeActionPerformed
+    private void txtSearchBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSearchBoxActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtTypeActionPerformed
+    }//GEN-LAST:event_txtSearchBoxActionPerformed
 
     private void btnAddPersonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddPersonActionPerformed
           
@@ -161,6 +174,35 @@ public class MainJFrame extends javax.swing.JFrame {
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.next(userProcessContainer);
     }//GEN-LAST:event_btnAddPersonActionPerformed
+
+    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
+        // TODO add your handling code here:
+        if (!txtSearchBox.getText().isBlank()) {
+            String accountNumber = txtSearchBox.getText();
+            Account foundAccount = accountDirectory.searchAccount(accountNumber);
+            
+            if (foundAccount != null) {
+                
+                ViewAccountJPanel panel = new ViewAccountJPanel(userProcessContainer, accountDirectory, foundAccount);
+                userProcessContainer.add("ViewAccountJPanel", panel);
+                CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+                layout.next(userProcessContainer);
+                
+            } else {
+                JOptionPane.showMessageDialog(null, "Account not found. Please check the account number and try again.", "Warning", JOptionPane.WARNING_MESSAGE);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Please type the account number to view", "Warning", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_btnSearchActionPerformed
+
+    private void txtSearchBoxMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtSearchBoxMouseClicked
+        // TODO add your handling code here:
+        if (txtSearchBox.getText().equals("Type name or street address")) {
+            txtSearchBox.setText("");
+        }
+        
+    }//GEN-LAST:event_txtSearchBoxMouseClicked
 
     /**
      * @param args the command line arguments
@@ -204,9 +246,128 @@ public class MainJFrame extends javax.swing.JFrame {
     private javax.swing.JLabel lblTitle;
     private javax.swing.JPanel leftJPanel;
     private javax.swing.JSplitPane splitPane;
-    private javax.swing.JTextField txtType;
+    private javax.swing.JTextField txtSearchBox;
     private javax.swing.JPanel userProcessContainer;
     // End of variables declaration//GEN-END:variables
+    
+    private void generateDemoData() {
+        Account Melly = accountDirectory.addAccount();
+        Melly.setFirstName("Melly");
+        Melly.setLastName("Sherry");
+        Melly.setSocialSecurityNumber(823414312);
+        Melly.setAge(26);
 
+        
+        Account.Address homeAddressMelly = Melly.getHomeAddress();
+        homeAddressMelly.setStreetAddress("Ayer Rd");
+        homeAddressMelly.setUnitNumber("4");
+        homeAddressMelly.setCity("Harvard");
+        homeAddressMelly.setState("MA");
+        homeAddressMelly.setZipcode("01451");
+        homeAddressMelly.setPhoneNumber("1872322234");
+
+        
+        Account.Address workAddressMelly = Melly.getWorkAddress();
+        workAddressMelly.setStreetAddress("Shaker Rd");
+        workAddressMelly.setUnitNumber("1");
+        workAddressMelly.setCity("Harvard");
+        workAddressMelly.setState("MA");
+        workAddressMelly.setZipcode("01451");
+        workAddressMelly.setPhoneNumber("8876278866");
+
+        
+        Account Michael = accountDirectory.addAccount();
+        Michael.setFirstName("Michael");
+        Michael.setLastName("Brown");
+        Michael.setSocialSecurityNumber(687823243);
+        Michael.setAge(25);
+
+        
+        Account.Address homeAddressMichael = Michael.getHomeAddress();
+        homeAddressMichael.setStreetAddress("Mile Hill Rd");
+        homeAddressMichael.setUnitNumber("41");
+        homeAddressMichael.setCity("Westminster");
+        homeAddressMichael.setState("MA");
+        homeAddressMichael.setZipcode("01473");
+        homeAddressMichael.setPhoneNumber("6879784567");
+
+        
+        Account.Address workAddressMichael = Michael.getWorkAddress();
+        workAddressMichael.setStreetAddress("State Rd E");
+        workAddressMichael.setUnitNumber("69");
+        workAddressMichael.setCity("Westminster");
+        workAddressMichael.setState("MA");
+        workAddressMichael.setZipcode("01473");
+        workAddressMichael.setPhoneNumber("7789870986");
+
+        
+        Account Belle = accountDirectory.addAccount();
+        Belle.setFirstName("Belle");
+        Belle.setLastName("Ash");
+        Belle.setSocialSecurityNumber(821323456);
+        Belle.setAge(19);
+
+        Account.Address homeAddressBelle = Belle.getHomeAddress();
+        homeAddressBelle.setStreetAddress("Broadway");
+        homeAddressBelle.setUnitNumber("277");
+        homeAddressBelle.setCity("Brooklyn");
+        homeAddressBelle.setState("NY");
+        homeAddressBelle.setZipcode("11211");
+        homeAddressBelle.setPhoneNumber("9846578722");
+
+        Account.Address workAddressBelle = Belle.getWorkAddress();
+        workAddressBelle.setStreetAddress("Wythe Ave");
+        workAddressBelle.setUnitNumber("133");
+        workAddressBelle.setCity("Brooklyn");
+        workAddressBelle.setState("NY");
+        workAddressBelle.setZipcode("11249");
+        workAddressBelle.setPhoneNumber("6548768877");
+
+        
+        Account Yoru = accountDirectory.addAccount();
+        Yoru.setFirstName("Yoru");
+        Yoru.setLastName("Gin");
+        Yoru.setSocialSecurityNumber(657889765);
+        Yoru.setAge(24);
+
+        Account.Address homeAddressYoru = Yoru.getHomeAddress();
+        homeAddressYoru.setStreetAddress("166th St");
+        homeAddressYoru.setUnitNumber("21");
+        homeAddressYoru.setCity("Gardena");
+        homeAddressYoru.setState("CA");
+        homeAddressYoru.setZipcode("90247");
+        homeAddressYoru.setPhoneNumber("8728739877");
+
+        Account.Address workAddressYoru = Yoru.getWorkAddress();
+        workAddressYoru.setStreetAddress("S Western Ave");
+        workAddressYoru.setUnitNumber("16601");
+        workAddressYoru.setCity("Gardena");
+        workAddressYoru.setState("CA");
+        workAddressYoru.setZipcode("90247");
+        workAddressYoru.setPhoneNumber("9658723377");
+
+        
+        Account Kangkang = accountDirectory.addAccount();
+        Kangkang.setFirstName("Kangkang");
+        Kangkang.setLastName("Wang");
+        Kangkang.setSocialSecurityNumber(353578989);
+        Kangkang.setAge(21);
+
+        Account.Address homeAddressKangkang = Kangkang.getHomeAddress();
+        homeAddressKangkang.setStreetAddress("Parker");
+        homeAddressKangkang.setUnitNumber("1");
+        homeAddressKangkang.setCity("Boston");
+        homeAddressKangkang.setState("MA");
+        homeAddressKangkang.setZipcode("02115");
+        homeAddressKangkang.setPhoneNumber("1231231234");
+
+        Account.Address workAddressKangkang = Kangkang.getWorkAddress();
+        workAddressKangkang.setStreetAddress("Huntington Ave");
+        workAddressKangkang.setUnitNumber("2");
+        workAddressKangkang.setCity("Boston");
+        workAddressKangkang.setState("MA");
+        workAddressKangkang.setZipcode("02115");
+        workAddressKangkang.setPhoneNumber("8887776666");
+    }
 
 }

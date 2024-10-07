@@ -8,6 +8,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import model.Account;
 import model.AccountDirectory;
+import model.Address;
 
 /**
  *
@@ -347,7 +348,7 @@ public class ViewAccountJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtAge, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtSSN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(lblHomeAddress)
@@ -385,8 +386,6 @@ public class ViewAccountJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         String firstName = txtFirstName.getText();
         String lastName = txtLastName.getText();
-        String SSN = txtSSN.getText();
-        String age = txtAge.getText();
         String streetAddressHome = txtStreetAddressHome.getText();
         String unitNumberHome = txtUnitNumberHome.getText();
         String cityHome = txtCityHome.getText();
@@ -400,29 +399,50 @@ public class ViewAccountJPanel extends javax.swing.JPanel {
         String zipCodeWork = txtZipCodeWork.getText();
         String phoneNumberWork = txtPhoneNumberWork.getText();
         
-        if (firstName.isBlank() || lastName.isBlank() || SSN.isBlank() || age.isBlank() || streetAddressHome.isBlank() || unitNumberHome.isBlank() || cityHome.isBlank() || stateHome.isBlank() || zipCodeHome.isBlank() || phoneNumberHome.isBlank() || streetAddressWork.isBlank() || unitNumberWork.isBlank() || cityWork.isBlank() || stateWork.isBlank() || zipCodeWork.isBlank() || phoneNumberWork.isBlank())
+        if (firstName.isBlank() || lastName.isBlank() || streetAddressHome.isBlank() || unitNumberHome.isBlank() || cityHome.isBlank() || stateHome.isBlank() || zipCodeHome.isBlank() || phoneNumberHome.isBlank() || streetAddressWork.isBlank() || unitNumberWork.isBlank() || cityWork.isBlank() || stateWork.isBlank() || zipCodeWork.isBlank() || phoneNumberWork.isBlank())
         {
             JOptionPane.showMessageDialog(this, "All fields are mandatory.", "Error", JOptionPane.ERROR_MESSAGE);
             //pause until the user closes the dialog.
             return;
         }
         
+        try {
+            int age = Integer.parseInt(txtAge.getText()); 
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, "Please enter valid numeric values for age.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        try {
+            long SSN = Long.parseLong(txtSSN.getText());  
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, "Please enter valid numeric values for SSN.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        
         account.setFirstName(firstName);
         account.setLastName(lastName);
+        int age = Integer.parseInt(txtAge.getText());
+        long SSN = Long.parseLong(txtSSN.getText());
         account.setSocialSecurityNumber(SSN);
         account.setAge(age);
-        account.setStreetAddressHome(streetAddressHome);
-        account.setUnitNumberHome(unitNumberHome);
-        account.setCityHome(cityHome);
-        account.setStateHome(stateHome);
-        account.setZipcodeHome(zipCodeHome);
-        account.setPhoneNumberHome(phoneNumberHome);
-        account.setStreetAddressWork(streetAddressWork);
-        account.setUnitNumberWork(unitNumberWork);
-        account.setCityWork(cityWork);
-        account.setStateWork(stateWork);
-        account.setZipcodeWork(zipCodeWork);
-        account.setPhoneNumberWork(phoneNumberWork);
+        
+        Address homeAddress = account.getHomeAddress();
+        homeAddress.setStreetAddress(streetAddressHome);
+        homeAddress.setUnitNumber(unitNumberHome);
+        homeAddress.setCity(cityHome);
+        homeAddress.setState(stateHome);
+        homeAddress.setZipcode(zipCodeHome);
+        homeAddress.setPhoneNumber(phoneNumberHome);
+
+        Address workAddress = account.getWorkAddress();
+        workAddress.setStreetAddress(streetAddressWork);
+        workAddress.setUnitNumber(unitNumberWork);
+        workAddress.setCity(cityWork);
+        workAddress.setState(stateWork);
+        workAddress.setZipcode(zipCodeWork);
+        workAddress.setPhoneNumber(phoneNumberWork);
         
         JOptionPane.showMessageDialog(null, "Account successfully updated.", "Warning", JOptionPane.WARNING_MESSAGE);
         
@@ -480,20 +500,24 @@ public class ViewAccountJPanel extends javax.swing.JPanel {
     private void refreshTextFields() {
         txtFirstName.setText(account.getFirstName());
         txtLastName.setText(account.getLastName());
-        txtSSN.setText(account.getSocialSecurityNumber());
-        txtAge.setText(account.getAge());
-        txtStreetAddressHome.setText(account.getStreetAddressHome());
-        txtUnitNumberHome.setText(account.getUnitNumberHome());
-        txtCityHome.setText(account.getCityHome());
-        txtStateHome.setText(account.getStateHome());
-        txtZipCodeHome.setText(account.getZipcodeHome());
-        txtPhoneNumberHome.setText(account.getPhoneNumberHome());
-        txtStreetAddressWork.setText(account.getStreetAddressWork());
-        txtUnitNumberWork.setText(account.getUnitNumberWork());
-        txtCityWork.setText(account.getCityWork());
-        txtStateWork.setText(account.getStateWork());
-        txtZipCodeWork.setText(account.getZipcodeWork());
-        txtPhoneNumberWork.setText(account.getPhoneNumberWork());
+        txtSSN.setText(String.valueOf(account.getSocialSecurityNumber()));
+        txtAge.setText(String.valueOf(account.getAge()));
+        
+        Address homeAddress = account.getHomeAddress();
+        txtStreetAddressHome.setText(homeAddress.getStreetAddress());
+        txtUnitNumberHome.setText(homeAddress.getUnitNumber());
+        txtCityHome.setText(homeAddress.getCity());
+        txtStateHome.setText(homeAddress.getState());
+        txtZipCodeHome.setText(homeAddress.getZipcode());
+        txtPhoneNumberHome.setText(homeAddress.getPhoneNumber());
+
+        Address workAddress = account.getWorkAddress();
+        txtStreetAddressWork.setText(workAddress.getStreetAddress());
+        txtUnitNumberWork.setText(workAddress.getUnitNumber());
+        txtCityWork.setText(workAddress.getCity());
+        txtStateWork.setText(workAddress.getState());
+        txtZipCodeWork.setText(workAddress.getZipcode());
+        txtPhoneNumberWork.setText(workAddress.getPhoneNumber());
     }
     
     private void setViewMode() {
@@ -534,7 +558,7 @@ public class ViewAccountJPanel extends javax.swing.JPanel {
         txtPhoneNumberHome.setEnabled(true);
         txtStreetAddressWork.setEnabled(true);
         txtUnitNumberWork.setEnabled(true);
-        txtCityWork.setEditable(true);
+        txtCityWork.setEnabled(true);
         txtStateWork.setEnabled(true);
         txtZipCodeWork.setEnabled(true);
         txtPhoneNumberWork.setEnabled(true);
