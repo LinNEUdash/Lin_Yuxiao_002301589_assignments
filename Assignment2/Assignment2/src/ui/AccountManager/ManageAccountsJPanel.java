@@ -181,10 +181,10 @@ public class ManageAccountsJPanel extends javax.swing.JPanel {
             row[0] = a;
             row[1] = a.getFirstName();
             row[2] = a.getLastName();
-            row[3] = a.getHomeAddress().getCity();
-            row[4] = a.getHomeAddress().getZipcode();
-            row[5] = a.getWorkAddress().getCity();
-            row[6] = a.getWorkAddress().getZipcode();
+            row[3] = a.getHomeAddressDetails()[2];
+            row[4] = a.getHomeAddressDetails()[4];
+            row[5] = a.getWorkAddressDetails()[2];
+            row[6] = a.getWorkAddressDetails()[4];
             
             model.addRow(row);
         }

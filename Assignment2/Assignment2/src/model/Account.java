@@ -12,7 +12,7 @@ public class Account {
     
     private String firstName;
     private String lastName;
-    private long socialSecurityNumber;  
+    private String socialSecurityNumber;  
     private int age;  
     private Address homeAddress;  
     private Address workAddress;  
@@ -39,11 +39,11 @@ public class Account {
         this.lastName = lastName;
     }
 
-    public long getSocialSecurityNumber() {
+    public String getSocialSecurityNumber() {
         return socialSecurityNumber;
     }
 
-    public void setSocialSecurityNumber(long socialSecurityNumber) {
+    public void setSocialSecurityNumber(String socialSecurityNumber) {
         this.socialSecurityNumber = socialSecurityNumber;
     }
 
@@ -55,14 +55,49 @@ public class Account {
         this.age = age;
     }
 
-    
-    public Address getHomeAddress() {
-        return homeAddress;
+    public void setHomeAddress(String streetAddress, String unitNumber, String city, String state, String zipcode, String phoneNumber) {
+        this.homeAddress.setStreetAddress(streetAddress);
+        this.homeAddress.setUnitNumber(unitNumber);
+        this.homeAddress.setCity(city);
+        this.homeAddress.setState(state);
+        this.homeAddress.setZipcode(zipcode);
+        this.homeAddress.setPhoneNumber(phoneNumber);
     }
 
-    public Address getWorkAddress() {
-        return workAddress;
+    
+    public void setWorkAddress(String streetAddress, String unitNumber, String city, String state, String zipcode, String phoneNumber) {
+        this.workAddress.setStreetAddress(streetAddress);
+        this.workAddress.setUnitNumber(unitNumber);
+        this.workAddress.setCity(city);
+        this.workAddress.setState(state);
+        this.workAddress.setZipcode(zipcode);
+        this.workAddress.setPhoneNumber(phoneNumber);
     }
+    
+    
+    public String[] getHomeAddressDetails() {
+        return new String[] {
+            homeAddress.getStreetAddress(),
+            homeAddress.getUnitNumber(),
+            homeAddress.getCity(),
+            homeAddress.getState(),
+            homeAddress.getZipcode(),
+            homeAddress.getPhoneNumber()
+        };
+    }
+    
+    public String[] getWorkAddressDetails() {
+        return new String[] {
+            workAddress.getStreetAddress(),
+            workAddress.getUnitNumber(),
+            workAddress.getCity(),
+            workAddress.getState(),
+            workAddress.getZipcode(),
+            workAddress.getPhoneNumber()
+        };
+    }
+
+    
 
     
     private class Address {

@@ -38,7 +38,7 @@ public class AccountDirectory {
     
     public Account searchAccount(String accountNumber) {
         for (Account a : accounts) {
-            if (a.getFirstName().contains(accountNumber) || a.getLastName().contains(accountNumber) || a.getHomeAddress().getStreetAddress().contains(accountNumber) || a.getWorkAddress().getStreetAddress().contains(accountNumber)){
+            if (a.getFirstName().contains(accountNumber) || a.getLastName().contains(accountNumber) || a.getHomeAddressDetails()[0].contains(accountNumber) || a.getWorkAddressDetails()[0].contains(accountNumber)){
                 return a;
             }
         }

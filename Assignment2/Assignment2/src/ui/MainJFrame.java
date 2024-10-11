@@ -254,120 +254,134 @@ public class MainJFrame extends javax.swing.JFrame {
         Account Melly = accountDirectory.addAccount();
         Melly.setFirstName("Melly");
         Melly.setLastName("Sherry");
-        Melly.setSocialSecurityNumber(823414312);
+        Melly.setSocialSecurityNumber("823414312");
         Melly.setAge(26);
+        
+        
+        Melly.setHomeAddress("Ayer Rd", "4", "Harvard", "MA", "01451", "1872322234");
 
         
-        Account.Address homeAddressMelly = Melly.getHomeAddress();
-        homeAddressMelly.setStreetAddress("Ayer Rd");
-        homeAddressMelly.setUnitNumber("4");
-        homeAddressMelly.setCity("Harvard");
-        homeAddressMelly.setState("MA");
-        homeAddressMelly.setZipcode("01451");
-        homeAddressMelly.setPhoneNumber("1872322234");
+//        Account.Address homeAddressMelly = Melly.getHomeAddress();
+//        homeAddressMelly.setStreetAddress("Ayer Rd");
+//        homeAddressMelly.setUnitNumber("4");
+//        homeAddressMelly.setCity("Harvard");
+//        homeAddressMelly.setState();
+//        homeAddressMelly.setZipcode("01451");
+//        homeAddressMelly.setPhoneNumber("1872322234");
 
-        
-        Account.Address workAddressMelly = Melly.getWorkAddress();
-        workAddressMelly.setStreetAddress("Shaker Rd");
-        workAddressMelly.setUnitNumber("1");
-        workAddressMelly.setCity("Harvard");
-        workAddressMelly.setState("MA");
-        workAddressMelly.setZipcode("01451");
-        workAddressMelly.setPhoneNumber("8876278866");
+         Melly.setWorkAddress("Shaker Rd", "1", "Harvard", "MA", "01451", "8876278866");
+//        Account.Address workAddressMelly = Melly.getWorkAddress();
+//        workAddressMelly.setStreetAddress("Shaker Rd");
+//        workAddressMelly.setUnitNumber("1");
+//        workAddressMelly.setCity("Harvard");
+//        workAddressMelly.setState("MA");
+//        workAddressMelly.setZipcode("01451");
+//        workAddressMelly.setPhoneNumber("8876278866");
 
         
         Account Michael = accountDirectory.addAccount();
         Michael.setFirstName("Michael");
         Michael.setLastName("Brown");
-        Michael.setSocialSecurityNumber(687823243);
+        Michael.setSocialSecurityNumber("687823243");
         Michael.setAge(25);
 
         
-        Account.Address homeAddressMichael = Michael.getHomeAddress();
-        homeAddressMichael.setStreetAddress("Mile Hill Rd");
-        homeAddressMichael.setUnitNumber("41");
-        homeAddressMichael.setCity("Westminster");
-        homeAddressMichael.setState("MA");
-        homeAddressMichael.setZipcode("01473");
-        homeAddressMichael.setPhoneNumber("6879784567");
+        Michael.setHomeAddress("Mile Hill Rd", "41", "Westminster", "MA", "01473", "6879784567");
+        Michael.setWorkAddress("State Rd E", "69", "Westminster", "MA", "01473", "7789870986");
+//        Account.Address homeAddressMichael = Michael.getHomeAddress();
+//        homeAddressMichael.setStreetAddress("Mile Hill Rd");
+//        homeAddressMichael.setUnitNumber("41");
+//        homeAddressMichael.setCity("Westminster");
+//        homeAddressMichael.setState("MA");
+//        homeAddressMichael.setZipcode("01473");
+//        homeAddressMichael.setPhoneNumber("6879784567");
 
         
-        Account.Address workAddressMichael = Michael.getWorkAddress();
-        workAddressMichael.setStreetAddress("State Rd E");
-        workAddressMichael.setUnitNumber("69");
-        workAddressMichael.setCity("Westminster");
-        workAddressMichael.setState("MA");
-        workAddressMichael.setZipcode("01473");
-        workAddressMichael.setPhoneNumber("7789870986");
+//        Account.Address workAddressMichael = Michael.getWorkAddress();
+//        workAddressMichael.setStreetAddress("State Rd E");
+//        workAddressMichael.setUnitNumber("69");
+//        workAddressMichael.setCity("Westminster");
+//        workAddressMichael.setState("MA");
+//        workAddressMichael.setZipcode("01473");
+//        workAddressMichael.setPhoneNumber("7789870986");
 
         
         Account Belle = accountDirectory.addAccount();
         Belle.setFirstName("Belle");
         Belle.setLastName("Ash");
-        Belle.setSocialSecurityNumber(821323456);
+        Belle.setSocialSecurityNumber("821323456");
         Belle.setAge(19);
+        
+        Belle.setHomeAddress("Broadway", "277", "Brooklyn", "NY", "11211", "9846578722");
+        Belle.setWorkAddress("Wythe Ave", "133", "Brooklyn", "NY", "11249", "6548768877");
 
-        Account.Address homeAddressBelle = Belle.getHomeAddress();
-        homeAddressBelle.setStreetAddress("Broadway");
-        homeAddressBelle.setUnitNumber("277");
-        homeAddressBelle.setCity("Brooklyn");
-        homeAddressBelle.setState("NY");
-        homeAddressBelle.setZipcode("11211");
-        homeAddressBelle.setPhoneNumber("9846578722");
-
-        Account.Address workAddressBelle = Belle.getWorkAddress();
-        workAddressBelle.setStreetAddress("Wythe Ave");
-        workAddressBelle.setUnitNumber("133");
-        workAddressBelle.setCity("Brooklyn");
-        workAddressBelle.setState("NY");
-        workAddressBelle.setZipcode("11249");
-        workAddressBelle.setPhoneNumber("6548768877");
+//        Account.Address homeAddressBelle = Belle.getHomeAddress();
+//        homeAddressBelle.setStreetAddress("Broadway");
+//        homeAddressBelle.setUnitNumber("277");
+//        homeAddressBelle.setCity("Brooklyn");
+//        homeAddressBelle.setState("NY");
+//        homeAddressBelle.setZipcode("11211");
+//        homeAddressBelle.setPhoneNumber("9846578722");
+//
+//        Account.Address workAddressBelle = Belle.getWorkAddress();
+//        workAddressBelle.setStreetAddress("Wythe Ave");
+//        workAddressBelle.setUnitNumber("133");
+//        workAddressBelle.setCity("Brooklyn");
+//        workAddressBelle.setState("NY");
+//        workAddressBelle.setZipcode("11249");
+//        workAddressBelle.setPhoneNumber("6548768877");
 
         
         Account Yoru = accountDirectory.addAccount();
         Yoru.setFirstName("Yoru");
         Yoru.setLastName("Gin");
-        Yoru.setSocialSecurityNumber(657889765);
+        Yoru.setSocialSecurityNumber("657889765");
         Yoru.setAge(24);
+        
+        Yoru.setHomeAddress("166th St", "21", "Gardena", "CA", "90247", "8728739877");
+        Yoru.setWorkAddress("S Western Ave", "16601", "Gardena", "CA", "90247", "9658723377");
 
-        Account.Address homeAddressYoru = Yoru.getHomeAddress();
-        homeAddressYoru.setStreetAddress("166th St");
-        homeAddressYoru.setUnitNumber("21");
-        homeAddressYoru.setCity("Gardena");
-        homeAddressYoru.setState("CA");
-        homeAddressYoru.setZipcode("90247");
-        homeAddressYoru.setPhoneNumber("8728739877");
-
-        Account.Address workAddressYoru = Yoru.getWorkAddress();
-        workAddressYoru.setStreetAddress("S Western Ave");
-        workAddressYoru.setUnitNumber("16601");
-        workAddressYoru.setCity("Gardena");
-        workAddressYoru.setState("CA");
-        workAddressYoru.setZipcode("90247");
-        workAddressYoru.setPhoneNumber("9658723377");
+//        Account.Address homeAddressYoru = Yoru.getHomeAddress();
+//        homeAddressYoru.setStreetAddress("166th St");
+//        homeAddressYoru.setUnitNumber("21");
+//        homeAddressYoru.setCity("Gardena");
+//        homeAddressYoru.setState("CA");
+//        homeAddressYoru.setZipcode("90247");
+//        homeAddressYoru.setPhoneNumber("8728739877");
+//
+//        Account.Address workAddressYoru = Yoru.getWorkAddress();
+//        workAddressYoru.setStreetAddress("S Western Ave");
+//        workAddressYoru.setUnitNumber("16601");
+//        workAddressYoru.setCity("Gardena");
+//        workAddressYoru.setState("CA");
+//        workAddressYoru.setZipcode("90247");
+//        workAddressYoru.setPhoneNumber("9658723377");
 
         
         Account Kangkang = accountDirectory.addAccount();
         Kangkang.setFirstName("Kangkang");
         Kangkang.setLastName("Wang");
-        Kangkang.setSocialSecurityNumber(353578989);
+        Kangkang.setSocialSecurityNumber("353578989");
         Kangkang.setAge(21);
-
-        Account.Address homeAddressKangkang = Kangkang.getHomeAddress();
-        homeAddressKangkang.setStreetAddress("Parker");
-        homeAddressKangkang.setUnitNumber("1");
-        homeAddressKangkang.setCity("Boston");
-        homeAddressKangkang.setState("MA");
-        homeAddressKangkang.setZipcode("02115");
-        homeAddressKangkang.setPhoneNumber("1231231234");
-
-        Account.Address workAddressKangkang = Kangkang.getWorkAddress();
-        workAddressKangkang.setStreetAddress("Huntington Ave");
-        workAddressKangkang.setUnitNumber("2");
-        workAddressKangkang.setCity("Boston");
-        workAddressKangkang.setState("MA");
-        workAddressKangkang.setZipcode("02115");
-        workAddressKangkang.setPhoneNumber("8887776666");
+        
+        
+        Kangkang.setHomeAddress("Parker", "1", "Boston", "MA", "02115", "1231231234");
+        Kangkang.setWorkAddress("Huntington Ave", "2", "Boston", "MA", "02115", "8887776666");
+//        Account.Address homeAddressKangkang = Kangkang.getHomeAddress();
+//        homeAddressKangkang.setStreetAddress("Parker");
+//        homeAddressKangkang.setUnitNumber("1");
+//        homeAddressKangkang.setCity("Boston");
+//        homeAddressKangkang.setState("MA");
+//        homeAddressKangkang.setZipcode("02115");
+//        homeAddressKangkang.setPhoneNumber("1231231234");
+//
+//        Account.Address workAddressKangkang = Kangkang.getWorkAddress();
+//        workAddressKangkang.setStreetAddress("Huntington Ave");
+//        workAddressKangkang.setUnitNumber("2");
+//        workAddressKangkang.setCity("Boston");
+//        workAddressKangkang.setState("MA");
+//        workAddressKangkang.setZipcode("02115");
+//        workAddressKangkang.setPhoneNumber("8887776666");
     }
 
 }
