@@ -158,16 +158,14 @@ public class Info5001UniversityExample {
                 float grade = seatAssignment.GetCourseStudentScore() / seatAssignment.getCreditHours();
                 int courseTuition = course.getCoursePrice();
 
-                // 输出课程详情
                 System.out.println("  Course: " + course.getCOurseNumber() + " | Professor: " + professor + " | Grade: " + grade);
-                
-                // 累加学费和学分
+             
                 tuition += courseTuition;
                 totalCredits += seatAssignment.getCreditHours();
                 totalScore += seatAssignment.GetCourseStudentScore();
             }
 
-            // 计算GPA
+            
             float gpa = totalCredits > 0 ? totalScore / totalCredits : 0;
             System.out.println("  GPA: " + gpa + " | Total Tuition: $" + tuition);
             System.out.println("------------------------------------");
