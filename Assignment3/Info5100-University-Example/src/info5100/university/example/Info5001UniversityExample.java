@@ -59,33 +59,25 @@ public class Info5001UniversityExample {
 //    }
 
          public static void main(String[] args) {
-        // Step 1: Initialize the department and course catalog
         Department department = new Department("Information Systems");
 
-        // Step 2: Populate the course catalog with core and elective courses
         populateCourseCatalog(department);
 
-        // Step 3: Create a course schedule for the semester "Fall2024"
         CourseSchedule fallSchedule = department.newCourseSchedule("Fall2024");
 
-        // Step 4: Create students and professors
         populateStudentsAndProfessors(department);
 
-        // Step 5: Create course offers and assign teachers to them
         populateCourseOffersAndAssignTeachers(department, fallSchedule);
 
-        // Step 6: Register students in courses
         registerStudentsInCourses(department, fallSchedule);
 
-        // Step 7: Generate and print the report for "Fall2024"
         generateReport(department, "Fall2024");
     }
 
-    // Method to populate the course catalog with core and elective courses
     private static void populateCourseCatalog(Department department) {
         CourseCatalog catalog = department.getCourseCatalog();
-        catalog.newCourse("Core Subject", "IS5100", 4);  // Core course
-        catalog.newCourse("Elective 1", "IS5200", 3);    // Elective courses
+        catalog.newCourse("Core Subject", "IS5100", 4);  
+        catalog.newCourse("Elective 1", "IS5200", 3);    
         catalog.newCourse("Elective 2", "IS5300", 3);
         catalog.newCourse("Elective 3", "IS5400", 3);
         catalog.newCourse("Elective 4", "IS5500", 3);
