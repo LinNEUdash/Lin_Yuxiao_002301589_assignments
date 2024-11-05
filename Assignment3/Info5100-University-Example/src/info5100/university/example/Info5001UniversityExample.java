@@ -123,18 +123,15 @@ public class Info5001UniversityExample {
     }
 }
 
-// Method to register students for courses
     private static void registerStudentsInCourses(Department department, CourseSchedule schedule) {
         ArrayList<StudentProfile> students = department.getStudentDirectory().getStudentList();
 
-        // Register each student in multiple courses
         for (StudentProfile student : students) {
             CourseLoad fallLoad = student.newCourseLoad("Fall2024");
             int coursesRegistered = 0;
 
-            // Register the student in 2-3 random courses
             for (CourseOffer offer : schedule.getSchedule()) {
-                if (Math.random() > 0.5 || coursesRegistered < 2) {  // Ensure each student registers for at least 2 courses
+                if (Math.random() > 0.5 || coursesRegistered < 2) {
                     SeatAssignment seatAssignment = fallLoad.newSeatAssignment(offer);
                     if (seatAssignment != null) {
                         ArrayList<Float> grades = new ArrayList<>(Arrays.asList(4.0f, 3.7f, 3.3f, 3.0f, 2.7f));
